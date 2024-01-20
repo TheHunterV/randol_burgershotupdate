@@ -4,7 +4,7 @@
 ## Link to free MLO: https://gta5mod.net/gta-5-mods/maps/mlo-gta-iv-burgershot-interior-sp-fivem-v2-0/
 
 ```
-## Add images from "images" folder)
+## Add images from "images" folder
 
 ```
 
