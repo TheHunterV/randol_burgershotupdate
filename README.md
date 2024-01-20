@@ -4,6 +4,11 @@
 ## Link to free MLO: https://gta5mod.net/gta-5-mods/maps/mlo-gta-iv-burgershot-interior-sp-fivem-v2-0/
 
 ```
+## Add images from "images" folder)
+
+```
+
+```
 ## Add to your qb-core/shared/items.lua (Credit to https://github.com/Zach488/qb-burgershot for saving me the stress of making my own.)
 
 ```
