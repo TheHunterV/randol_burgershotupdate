@@ -1,7 +1,7 @@
 # Randolio Burgershot UPDATE for QBCore Framework.
 
 ```
-## Link to free MLO: https://gta5mod.net/gta-5-mods/maps/mlo-gta-iv-burgershot-interior-sp-fivem-v2-0/
+## Link to free MLO: https://www.gta5-mods.com/maps/mlo-burgershot-2023-add-on-sp-fivem
 
 ```
 ## Add images from "images" folder
