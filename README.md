@@ -1,14 +1,14 @@
 # Randolio Burgershot UPDATE for QBCore Framework.
 
+## Link to free MLO
 ```
-## Link to free MLO: https://www.gta5-mods.com/maps/mlo-burgershot-2023-add-on-sp-fivem
+ https://www.gta5-mods.com/maps/mlo-burgershot-2023-add-on-sp-fivem
 
 ```
-## Add images from "images" folder
+## If using OX_INVENTORY change Config.Ox to true in the config.lua
 
-```
+## Add images from "images" folder. For OX_INVENTORY add images to ox_inventory/web/images
 
-```
 ## Add to your qb-core/shared/items.lua (Credit to https://github.com/Zach488/qb-burgershot for saving me the stress of making my own.)
 
 ```
@@ -29,6 +29,185 @@
 	['burger-potato'] 				 = {['name'] = 'burger-potato', 			 	['label'] = 'Bag of Potatoes', 		['weight'] = 1500, 		['type'] = 'item', 			['image'] = 'bs_potato.png', 	    		['unique'] = false, 	['useable'] = false, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'An Ingredient'},
 	['burger-mshakeformula'] 		 = {['name'] = 'burger-mshakeformula', 			['label'] = 'Milkshake Formula', 		['weight'] = 125, 		['type'] = 'item', 		['image'] = 'bs_ingredients_icecream.png', ['unique'] = false, 	['useable'] = false, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'An Ingredient'},
 	['burger-sodasyrup'] 		 	 = {['name'] = 'burger-sodasyrup', 				['label'] = 'Soda Syrup', 		['weight'] = 125, 		['type'] = 'item', 				['image'] = 'bs_ingredients_hfcs.png', 	['unique'] = false, 	['useable'] = false, 	['shouldClose'] = true,    ['combinable'] = nil,   ['description'] = 'An Ingredient'},
+
+```
+## For OX_INVENTORY add to ox_inventory/data/items.lua
+```
+["burger-bun"] = {
+    label = "Bun",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_bun.png",
+    }
+},
+
+["burger-mshake"] = {
+    label = "Milkshake",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "Hand-scooped for you!",
+    client = {
+        image = "bs_milkshake.png",
+    }
+},
+
+["burger-moneyshot"] = {
+    label = "Moneyshot",
+    weight = 300,
+    stack = true,
+    close = true,
+    description = "Sates Hunger.",
+    client = {
+        image = "bs_money-shot.png",
+    }
+},
+
+["burger-heartstopper"] = {
+    label = "Heartstopper",
+    weight = 2500,
+    stack = true,
+    close = true,
+    description = "Sates Hunger.",
+    client = {
+        image = "bs_the-heart-stopper.png",
+    }
+},
+
+["burger-lettuce"] = {
+    label = "Lettuce",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_lettuce.png",
+    }
+},
+
+["burger-fries"] = {
+    label = "Fries",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "Sates Hunger.",
+    client = {
+        image = "bs_fries.png",
+    }
+},
+
+["burger-mshakeformula"] = {
+    label = "Milkshake Formula",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_ingredients_icecream.png",
+    }
+},
+
+["burger-meatfree"] = {
+    label = "MeatFree",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "Sates Hunger.",
+    client = {
+        image = "bs_meat-free.png",
+    }
+},
+
+["burger-softdrink"] = {
+    label = "Soft Drink",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ice Cold Drink.",
+    client = {
+        image = "bs_softdrink.png",
+    }
+},
+
+["burger-bleeder"] = {
+    label = "Bleeder",
+    weight = 250,
+    stack = true,
+    close = true,
+    description = "Sates Hunger.",
+    client = {
+        image = "bs_the-bleeder.png",
+    }
+},
+
+["burger-raw"] = {
+    label = "Raw Patty",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_patty_raw.png",
+    }
+},
+
+["burger-meat"] = {
+    label = "Cooked Patty",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_patty.png",
+    }
+},
+
+["burger-tomato"] = {
+    label = "Tomato",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_tomato.png",
+    }
+},
+
+["burger-sodasyrup"] = {
+    label = "Soda Syrup",
+    weight = 125,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_ingredients_hfcs.png",
+    }
+},
+
+["burger-potato"] = {
+    label = "Bag of Potatoes",
+    weight = 1500,
+    stack = true,
+    close = true,
+    description = "An Ingredient",
+    client = {
+        image = "bs_potato.png",
+    }
+},
+
+["burger-torpedo"] = {
+    label = "Torpedo",
+    weight = 310,
+    stack = true,
+    close = true,
+    description = "Sates Hunger.",
+    client = {
+        image = "bs_torpedo.png",
+    }
+},
 
 ```
 ## Add this to your @qb-core/shared/jobs.lua 
@@ -105,7 +284,37 @@ burgershot = {
             EmoteMoving = false,
         }
     },
+	["uncuff"] = {
+		"mp_arresting",
+		"a_uncuff",
+		"Uncuff",
+			AnimationOptions = {
+			EmoteLoop = true,
+			EmoteMoving = true
+		}
+	},
 
 ```
 
 ## Add the 2 .ogg files in [sounds] to interact-sound/client/html/sounds
+
+## For OX_INVENTORY add to ox_inventory/data/shops.lua
+
+```
+burgershot = {
+    name = 'Burgershot',
+    groups = {
+        ['burgershot'] = 0
+    },
+    inventory = {
+        { name = 'burger-bun', price = 0},
+        { name = 'burger-raw', price = 0},
+        { name = 'burger-tomato', price = 0},
+        { name = 'burger-lettuce', price = 0},
+        { name = 'burger-potato', price = 0},
+        { name = 'burger-mshakeformula', price = 0},
+        { name = 'burger-sodasyrup', price = 0},
+    },
+},
+
+```
