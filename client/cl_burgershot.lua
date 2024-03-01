@@ -29,6 +29,24 @@ AddEventHandler('onResourceStop', function(resourceName)
     end 
 end)
 
+AddEventHandler('onResourceStop', function(resourceName) 
+    if GetCurrentResourceName() == resourceName then
+        for k, v in pairs(Config.Stash) do
+            exports['qb-target']:RemoveZone("bsstash"..k)
+        end
+        DeletePed(jobPed)
+    end 
+end)
+
+AddEventHandler('onResourceStop', function(resourceName) 
+    if GetCurrentResourceName() == resourceName then
+        for k, v in pairs(Config.Ingredients) do
+            exports['qb-target']:RemoveZone("ingredients"..k)
+        end
+        DeletePed(jobPed)
+    end 
+end)
+
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     PlayerJob = QBCore.Functions.GetPlayerData().job
     BurgerZones()
@@ -37,6 +55,20 @@ end)
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     for k, v in pairs(Config.Zones) do
         exports['qb-target']:RemoveZone("burgershot"..k)
+    end
+    DeletePed(jobPed)
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    for k, v in pairs(Config.Stash) do
+        exports['qb-target']:RemoveZone("bsstash"..k)
+    end
+    DeletePed(jobPed)
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    for k, v in pairs(Config.Ingredients) do
+        exports['qb-target']:RemoveZone("ingredients"..k)
     end
     DeletePed(jobPed)
 end)
@@ -67,6 +99,88 @@ function BurgerZones()
             distance = 1.5
         })
     end
+
+    for k, v in pairs(Config.Stash) do
+        if Config.Ox then
+            exports.ox_target:addBoxZone({
+                coords = v.coords,
+                size = vec3(1.4, 1.0, 2.3),
+                rotation = v.heading,
+                debug = Config.Debug,
+                options = {
+                    {
+                        name = 'stash',
+                        icon = v.icon,
+                        label = v.label,
+                        distance = 1.5,
+                        groups = Config.Job,
+                        onSelect = function()
+                            exports.ox_inventory:openInventory('stash', v.label)
+                        end
+                    }
+                }
+            })
+        else
+        exports['qb-target']:AddCircleZone("bsstash"..k, v.coords, v.radius, {
+            name = "bsstash"..k,
+            debugPoly = false,
+            useZ=true,
+        }, {
+            options = {
+                {
+                    type = "client",
+                    event = v.event,
+                    icon = v.icon,
+                    label = v.label,
+                    job = v.job,
+                },
+            },
+            distance = 1.5
+        })
+        end
+    end
+
+    for k, v in pairs(Config.Ingredients) do
+        if Config.Ox then
+        exports.ox_target:addBoxZone({
+            coords = v.coords,
+            size = vec3(2.2, 0.6, 3.0),
+            rotation = v.heading,
+            debug = Config.Debug,
+            options = {
+                {
+                    name = 'ingredients',
+                    icon = 'fa-solid fa-box-open',
+                    label = v.label,
+                    distance = 1.5,
+                    groups = Config.Job,
+                    onSelect = function()
+                        exports.ox_inventory:openInventory('shop', { type = 'burgershot'})
+                    end
+                }
+            }
+        })
+    else 
+        exports['qb-target']:AddCircleZone("ingredients"..k, v.coords, v.radius, {
+            name = "ingredients"..k,
+            debugPoly = false,
+            useZ=true,
+        }, {
+            options = {
+                {
+                    type = "client",
+                    event = v.event,
+                    icon = v.icon,
+                    label = v.label,
+                    job = v.job,
+                },
+            },
+            distance = 1.5
+        })
+        end
+    end
+
+
     if not DoesEntityExist(jobPed) then
 
 	RequestModel(Config.GaragePed) while not HasModelLoaded(Config.GaragePed) do Wait(0) end
@@ -131,12 +245,12 @@ RegisterNetEvent('randol_burgershot:client:storeGarage', function()
         QBCore.Functions.Notify("This is not a work vehicle.", "error")
     end
 end)
-    
+ 
 RegisterNetEvent("randol_burgershot:client:frontTray", function()
     TriggerEvent("inventory:client:SetCurrentStash", "bsfoodtray")
     TriggerServerEvent("inventory:server:OpenInventory", "stash", "bsfoodtray", {
         maxweight = 30000,
-        slots = 12,
+        slots = 15,
     })
 end)
 
@@ -144,24 +258,24 @@ RegisterNetEvent("randol_burgershot:client:frontTray2", function()
     TriggerEvent("inventory:client:SetCurrentStash", "bsfoodtray2")
     TriggerServerEvent("inventory:server:OpenInventory", "stash", "bsfoodtray2", {
         maxweight = 30000,
-        slots = 12,
+        slots = 15,
     })
 end)
 RegisterNetEvent("randol_burgershot:client:frontTray3", function()
     TriggerEvent("inventory:client:SetCurrentStash", "bsfoodtray3")
     TriggerServerEvent("inventory:server:OpenInventory", "stash", "bsfoodtray3", {
         maxweight = 30000,
-        slots = 12,
+        slots = 15,
     })
 end)
+
 RegisterNetEvent("randol_burgershot:client:frontTray4", function()
     TriggerEvent("inventory:client:SetCurrentStash", "bsfoodtray4")
     TriggerServerEvent("inventory:server:OpenInventory", "stash", "bsfoodtray4", {
         maxweight = 30000,
-        slots = 12,
+        slots = 15,
     })
 end)
-
 
 RegisterNetEvent("randol_burgershot:client:passThrough", function()
     TriggerEvent("inventory:client:SetCurrentStash", "bsBigTray")
@@ -214,4 +328,3 @@ RegisterNetEvent("randol_burgershot:bill", function()
         TriggerServerEvent("randol_burgershot:server:billPlayer", bill.citizenid, bill.billprice)
     end
 end)
-

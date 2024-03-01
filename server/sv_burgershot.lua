@@ -1,5 +1,12 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+CreateThread(function()
+    if not Config.Ox then return end
+    for k, v in pairs(Config.Stash) do
+        exports.ox_inventory:RegisterStash(v.label, v.label, Config.Stash[k].slots, Config.Stash[k].weight)
+    end 
+end)
+
 RegisterNetEvent('randol_burgershot:server:makeBleeder', function()
     local Player = QBCore.Functions.GetPlayer(source)
     if not Player then return end
