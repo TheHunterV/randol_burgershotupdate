@@ -29,23 +29,6 @@ AddEventHandler('onResourceStop', function(resourceName)
     end 
 end)
 
-AddEventHandler('onResourceStop', function(resourceName) 
-    if GetCurrentResourceName() == resourceName then
-        for k, v in pairs(Config.Stash) do
-            exports['qb-target']:RemoveZone("bsstash"..k)
-        end
-        DeletePed(jobPed)
-    end 
-end)
-
-AddEventHandler('onResourceStop', function(resourceName) 
-    if GetCurrentResourceName() == resourceName then
-        for k, v in pairs(Config.Ingredients) do
-            exports['qb-target']:RemoveZone("ingredients"..k)
-        end
-        DeletePed(jobPed)
-    end 
-end)
 
 AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     PlayerJob = QBCore.Functions.GetPlayerData().job
@@ -59,19 +42,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     DeletePed(jobPed)
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    for k, v in pairs(Config.Stash) do
-        exports['qb-target']:RemoveZone("bsstash"..k)
-    end
-    DeletePed(jobPed)
-end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    for k, v in pairs(Config.Ingredients) do
-        exports['qb-target']:RemoveZone("ingredients"..k)
-    end
-    DeletePed(jobPed)
-end)
 
 function loadAnimDict(dict)
     while (not HasAnimDictLoaded(dict)) do
@@ -105,15 +76,13 @@ function BurgerZones()
             exports.ox_target:addBoxZone({
                 coords = v.coords,
                 size = vec3(1.4, 1.0, 2.3),
-                rotation = v.heading,
-                debug = Config.Debug,
                 options = {
                     {
                         name = 'stash',
                         icon = v.icon,
                         label = v.label,
                         distance = 1.5,
-                        groups = Config.Job,
+                        groups = v.job,
                         onSelect = function()
                             exports.ox_inventory:openInventory('stash', v.label)
                         end
@@ -145,15 +114,13 @@ function BurgerZones()
         exports.ox_target:addBoxZone({
             coords = v.coords,
             size = vec3(2.2, 0.6, 3.0),
-            rotation = v.heading,
-            debug = Config.Debug,
             options = {
                 {
                     name = 'ingredients',
                     icon = 'fa-solid fa-box-open',
                     label = v.label,
                     distance = 1.5,
-                    groups = Config.Job,
+                    groups = v.job,
                     onSelect = function()
                         exports.ox_inventory:openInventory('shop', { type = 'burgershot'})
                     end
